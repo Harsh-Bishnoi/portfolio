@@ -33,7 +33,7 @@ function getMouseEnterDirection(e, rect) {
     }
 }
 
-const Button = ({ btnText, btnClass = "" }) => {
+const Button = ({ btnText, onClick, btnClass = "" }) => {
     const btnRef = useRef(null);
     const fillRef = useRef(null);
     const currentDirection = useRef(null);
@@ -131,7 +131,7 @@ const Button = ({ btnText, btnClass = "" }) => {
     const handleMouseUp = () => { };
 
     return (
-        <button
+        <button onClick={onClick}
             ref={btnRef}
             className={`relative overflow-hidden rounded-full border border-black px-8 py-3 font-semibold cursor-pointer select-none ${btnClass}`}
             style={{
