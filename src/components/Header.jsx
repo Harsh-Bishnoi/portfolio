@@ -71,7 +71,7 @@ const Header = () => {
         <div ref={containerRef} className="flex justify-center items-center flex-col overflow-hidden" >
             <div className="w-full"><Hero /></div>
             <div className="max-w-[1140px] px-4 w-full py-16">
-                <div className="flex md:justify-between flex-wrap items-center relative">
+                <div className="flex md:justify-between flex-col lg:flex-row items-center relative">
                     <div className="relative">
                         <div className="line-left absolute w-0.5 h-full opacity-[50%] origin-top bg-black scale-y-0 left-[-20px] top-0"></div>
                         <div className="line-right absolute w-0.5 h-full opacity-[50%] origin-top bg-black scale-y-0 -right-5 top-0"></div>
@@ -87,7 +87,7 @@ const Header = () => {
                             — Crafting Beautiful Interfaces with Code and Creativity
                         </p>
                     </div>
-                    <img ref={imgRef} className="md:max-w-[300px] w-full max-md:mt-6 justify-center flex" src={my_img} alt="my img"
+                    <img ref={imgRef} className="md:max-w-[300px] w-full max-lg:mt-6 justify-center flex" src={my_img} alt="my img"
                     />
                 </div>
             </div>
