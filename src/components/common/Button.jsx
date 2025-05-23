@@ -33,7 +33,7 @@ function getMouseEnterDirection(e, rect) {
     }
 }
 
-const DirectionalGsapButton = ({ btnText, btnClass = "" }) => {
+const Button = ({ btnText, btnClass = "" }) => {
     const btnRef = useRef(null);
     const fillRef = useRef(null);
     const currentDirection = useRef(null);
@@ -43,25 +43,28 @@ const DirectionalGsapButton = ({ btnText, btnClass = "" }) => {
 
         gsap.killTweensOf(fill);
         gsap.set(fill, { opacity: 1, backgroundColor: "white" });
-
-        gsap.set(fill, { top: "auto", bottom: "auto", left: "auto", right: "auto", width: "100%", height: "100%" });
+        gsap.set(fill, {
+            top: "auto",
+            bottom: "auto",
+            left: "auto",
+            right: "auto",
+            width: "100%",
+            height: "100%",
+        });
 
         switch (direction) {
             case DIRECTIONS.LEFT:
                 gsap.set(fill, { width: 0, height: "100%", top: 0, left: 0 });
                 gsap.to(fill, { duration: 0.5, width: "100%", ease: "power2.out" });
                 break;
-
             case DIRECTIONS.RIGHT:
                 gsap.set(fill, { width: 0, height: "100%", top: 0, right: 0 });
                 gsap.to(fill, { duration: 0.5, width: "100%", ease: "power2.out" });
                 break;
-
             case DIRECTIONS.TOP:
                 gsap.set(fill, { height: 0, width: "100%", top: 0, left: 0 });
                 gsap.to(fill, { duration: 0.5, height: "100%", ease: "power2.out" });
                 break;
-
             case DIRECTIONS.BOTTOM:
                 gsap.set(fill, { height: 0, width: "100%", bottom: 0, left: 0 });
                 gsap.to(fill, { duration: 0.5, height: "100%", ease: "power2.out" });
@@ -71,18 +74,26 @@ const DirectionalGsapButton = ({ btnText, btnClass = "" }) => {
 
     const animateFillOut = (direction) => {
         const fill = fillRef.current;
-
         gsap.killTweensOf(fill);
 
         switch (direction) {
             case DIRECTIONS.LEFT:
             case DIRECTIONS.RIGHT:
-                gsap.to(fill, { duration: 0.5, width: 0, ease: "power2.in", opacity: 0 });
+                gsap.to(fill, {
+                    duration: 0.5,
+                    width: 0,
+                    ease: "power2.in",
+                    opacity: 0,
+                });
                 break;
-
             case DIRECTIONS.TOP:
             case DIRECTIONS.BOTTOM:
-                gsap.to(fill, { duration: 0.5, height: 0, ease: "power2.in", opacity: 0 });
+                gsap.to(fill, {
+                    duration: 0.5,
+                    height: 0,
+                    ease: "power2.in",
+                    opacity: 0,
+                });
                 break;
         }
     };
@@ -90,14 +101,13 @@ const DirectionalGsapButton = ({ btnText, btnClass = "" }) => {
     const handleMouseEnter = (e) => {
         const btn = btnRef.current;
         const rect = btn.getBoundingClientRect();
-
         const direction = getMouseEnterDirection(e, rect);
         currentDirection.current = direction;
 
         animateFillIn(direction);
 
         gsap.to(btn, {
-            color: "#000000",
+            borderColor: "#ffffff",
             duration: 0.5,
             ease: "power1.out",
             boxShadow: "0 8px 20px rgba(0, 0, 0, 0.2)",
@@ -109,36 +119,27 @@ const DirectionalGsapButton = ({ btnText, btnClass = "" }) => {
         animateFillOut(currentDirection.current);
 
         gsap.to(btn, {
-            color: "#ffffff",
+            borderColor: "#000000",
             duration: 0.5,
             ease: "power1.out",
             boxShadow: "0 0 0 rgba(0,0,0,0)",
         });
     };
 
-    const handleMouseDown = () => {
-        const btn = btnRef.current;
-        gsap.to(btn, {
-            scale: 0.95,
-            duration: 0.15,
-            ease: "power1.out",
-        });
-    };
-
-    const handleMouseUp = () => {
-        const btn = btnRef.current;
-        gsap.to(btn, {
-            scale: 1,
-            duration: 0.15,
-            ease: "power1.out",
-        });
-    };
+    // Removed scaling
+    const handleMouseDown = () => { };
+    const handleMouseUp = () => { };
 
     return (
         <button
             ref={btnRef}
-            className={`relative overflow-hidden rounded-full border border-white bg-black px-8 py-3 font-semibold cursor-pointer select-none ${btnClass}`}
-            style={{ color: "#ffffff", userSelect: "none", transformOrigin: "center" }}
+            className={`relative overflow-hidden rounded-full border border-black px-8 py-3 font-semibold cursor-pointer select-none ${btnClass}`}
+            style={{
+                backgroundColor: "#D3D3D3",
+                color: "#000000",
+                userSelect: "none",
+                transformOrigin: "center",
+            }}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             onMouseDown={handleMouseDown}
@@ -166,4 +167,4 @@ const DirectionalGsapButton = ({ btnText, btnClass = "" }) => {
     );
 };
 
-export default DirectionalGsapButton;
+export default Button;

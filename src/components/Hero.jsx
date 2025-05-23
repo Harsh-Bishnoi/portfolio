@@ -84,84 +84,62 @@ const Hero = () => {
     }, []);
 
     return (
-        <div className="flex justify-between items-center py-4 bg-black">
+        <div className={`flex justify-between items-center py-4 transition-colors duration-500 ${menuOpen ? "bg-black" : "bg-[#D3D3D3]"}`}>
             <nav className="px-4 flex justify-between items-center max-w-[1140px] w-full mx-auto">
-                <a className="z-6 text-white" href="#">
+                <a className={`z-6 ${menuOpen ? "text-white" : "text-black"}`} href="#">
                     logo
                 </a>
-
                 <div
                     onClick={toggleNavbar}
                     className={`z-50 md:hidden flex flex-col justify-between w-6 h-5 cursor-pointer transform transition-transform duration-500 ease-in-out ${menuOpen ? "rotate-180" : ""
                         }`}
                 >
                     <span
-                        className={`block h-0.5 bg-white rounded transition-all duration-500 ease-in-out ${menuOpen ? "rotate-50 translate-y-2" : ""
-                            }`}
+                        className={`block h-0.5 rounded transition-all duration-500 ease-in-out ${menuOpen ? "bg-white rotate-50 translate-y-2" : "bg-black"}`}
                     ></span>
                     <span
-                        className={`block h-0.5 bg-white rounded transition-all duration-500 ease-in-out ${menuOpen ? "opacity-0" : ""
-                            }`}
+                        className={`block h-0.5 rounded transition-all duration-500 ease-in-out ${menuOpen ? "opacity-0" : `${menuOpen ? "bg-white" : "bg-black"}`}`}
                     ></span>
                     <span
-                        className={`block h-0.5 bg-white rounded transition-all duration-500 ease-in-out ${menuOpen ? "-rotate-50 -translate-y-2.5" : ""
-                            }`}
+                        className={`block h-0.5 rounded transition-all duration-500 ease-in-out ${menuOpen ? "bg-white -rotate-50 -translate-y-2.5" : "bg-black"}`}
                     ></span>
                 </div>
-
                 <ul
                     id="nav-name"
-                    className={`list-unstyled flex justify-center items-center nav-link gap-6 mb-0 ${menuOpen ? "show-navbar" : ""
-                        }`}
+                    className={`list-unstyled flex justify-center items-center nav-link gap-6 mb-0 ${menuOpen ? "show-navbar" : ""}`}
                 >
-                    <li>
-                        <a
-                            href="#"
-                            ref={homeRef}
-                            className="font-normal text-base leading-[100%] opacity-90 capitalize text-white"
-                            style={{ cursor: "pointer" }}
-                        >
-                            {splitTextToSpans("Home")}
-                        </a>
-                    </li>
-                    <li>
-                        <a
-                            href="#"
-                            ref={aboutRef}
-                            className="font-normal text-base leading-[100%] opacity-90 capitalize text-white"
-                            style={{ cursor: "pointer" }}
-                        >
-                            {splitTextToSpans("About")}
-                        </a>
-                    </li>
-                    <li>
-                        <a
-                            href="#"
-                            ref={projectRef}
-                            className="font-normal text-base leading-[100%] opacity-90 capitalize text-white"
-                            style={{ cursor: "pointer" }}
-                        >
-                            {splitTextToSpans("Project")}
-                        </a>
-                    </li>
-                    <li>
-                        <a
-                            href="#"
-                            ref={skillRef}
-                            className="font-normal text-base leading-[100%] opacity-90 capitalize text-white"
-                            style={{ cursor: "pointer" }}
-                        >
-                            {splitTextToSpans("My Skill")}
-                        </a>
-                    </li>
+                    {["Home", "About", "Project", "My Skill"].map((text, index) => {
+                        const refArr = [homeRef, aboutRef, projectRef, skillRef];
+                        return (
+                            <li key={index}>
+                                <a
+                                    href="#"
+                                    ref={refArr[index]}
+                                    className={`font-normal text-lg leading-[100%] opacity-90 capitalize ${menuOpen ? "text-white" : "text-black"}`}
+                                    style={{ cursor: "pointer" }}
+                                >
+                                    {splitTextToSpans(text)}
+                                </a>
+                            </li>
+                        );
+                    })}
                     <li className="md:hidden">
-                        <Button btnClass="" btnText="Contact" />
+                        <Button
+                            btnClass={`transition duration-300 px-4 py-2 rounded ${menuOpen
+                                ? "bg-white text-black hover:bg-gray-300"
+                                : "bg-transparent text-white hover:bg-white hover:text-black"
+                                }`}
+                            btnText="Contact"
+                        />
                     </li>
                 </ul>
 
                 <ul className="max-md:hidden block">
                     <li>
-                        <Button btnClass="" btnText="Contact" />
+                        <Button
+                            btnClass="transition duration-300 bg-transparent text-black hover:bg-black hover:text-white px-4 py-2 rounded"
+                            btnText="Contact"
+                        />
                     </li>
                 </ul>
             </nav>
