@@ -3,6 +3,7 @@
 
 body {
     font-family: "Underdog", system-ui;
+    background-color: #D3D3D3;
 }
 
 @media (max-width:767.98px) {
