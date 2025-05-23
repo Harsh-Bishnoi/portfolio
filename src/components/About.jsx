@@ -99,7 +99,7 @@ const About = () => {
 
     return (
         <section ref={sectionRef} className="py-20">
-            <div className="max-w-[1140px] px-6 mx-auto">
+            <div className="max-w-[1140px] px-4 mx-auto">
                 <div className="text-center mb-12">
                     <h1 className="text-5xl font-extrabold text-black mb-4 about-title">About Me</h1>
                     <p className="text-lg text-gray-700 max-w-2xl mx-auto about-text">
@@ -108,8 +108,8 @@ const About = () => {
                     </p>
                 </div>
                 <div className="flex flex-col md:flex-row items-center gap-10">
-                    <div className="w-full md:w-1/2 about-image">
-                        <img ref={imageRef} src={DeveloperAtWork} alt="Developer at work" className="rounded-lg shadow-md border border-[#D3D3D3] w-full" />
+                    <div className="md:w-1/2 about-image">
+                        <img ref={imageRef} src={DeveloperAtWork} alt="Developer at work" className="rounded-lg shadow-md border max-w-[534px] border-[#D3D3D3] w-full" />
                     </div>
                     <div className="w-full md:w-1/2 about-details">
                         <h2 className="text-2xl font-semibold text-black mb-4">Background</h2>
