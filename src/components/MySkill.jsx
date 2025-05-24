@@ -10,7 +10,7 @@ const MySkill = () => {
     const [showMore, setShowMore] = useState(false);
     const containerRef = useRef(null);
     const barsRef = useRef([]);
-    const extraRefs = useRef([]); // refs for extra skills container divs
+    const extraRefs = useRef([]); 
 
     const toggleShowMore = (newShowMore) => {
         setShowMore(newShowMore);
@@ -27,7 +27,6 @@ const MySkill = () => {
         barsRef.current = barsRef.current.slice(0, displayedSkills.length);
 
         const ctx = gsap.context(() => {
-            // Animate skill bars width on scroll
             gsap.fromTo(
                 barsRef.current,
                 { width: '0%' },
@@ -44,8 +43,6 @@ const MySkill = () => {
                     },
                 }
             );
-
-            // Animate extra skill items container on showMore
             if (showMore) {
                 const extraElements = extraRefs.current;
                 gsap.fromTo(
@@ -105,8 +102,6 @@ const MySkill = () => {
                                 </div>
                             </div>
                         ))}
-
-                        {/* Extra skills - wrapped to animate */}
                         {showMore &&
                             EXTRA_SKILLS.map(({ name, level, color }, i) => (
                                 <div
