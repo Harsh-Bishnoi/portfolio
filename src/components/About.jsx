@@ -31,12 +31,13 @@ const About = () => {
                         x,
                         y,
                         duration: 0.5,
-                        ease: "power3.out"
+                        ease: "power3.out",
                     });
                 }
             };
-            const section = sectionRef.current;
-            section.addEventListener("mousemove", handleMouseMove);
+            if (sectionRef.current) {
+                sectionRef.current.addEventListener("mousemove", handleMouseMove);
+            }
             gsap.utils.toArray(".about-text").forEach((el, i) => {
                 gsap.from(el, {
                     y: 50,
@@ -84,13 +85,15 @@ const About = () => {
                         scrollTrigger: {
                             trigger: experienceRef.current,
                             start: "top 80%",
-                        }
+                        },
                     }
                 );
             }
 
             return () => {
-                section.removeEventListener("mousemove", handleMouseMove);
+                if (sectionRef.current) {
+                    sectionRef.current.removeEventListener("mousemove", handleMouseMove);
+                }
             };
         }, sectionRef);
 
