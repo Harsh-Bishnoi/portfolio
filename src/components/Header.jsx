@@ -77,10 +77,10 @@ const Header = () => {
                         <div className="line-right absolute w-0.5 h-full opacity-[50%] origin-top bg-black scale-y-0 -right-5 top-0"></div>
                         <div className="line-top absolute h-0.5 w-full opacity-[50%] origin-left bg-black scale-x-0 top-[-12px] left-0"></div>
                         <div className="line-bottom absolute h-0.5 w-full opacity-[50%] origin-left bg-black scale-x-0 bottom-[-12px] left-0"></div>
-                        <h1 className="text-4xl md:text-6xl font-bold text-white stagger-text">
+                        <h1 className="text-4xl md:text-6xl font-bold text-[#555555] stagger-text">
                             Hi, I’m <span className="text-black">Harsh Bishnoi</span>
                         </h1>
-                        <h2 className="text-2xl sm:text-3xl pt-2 text-white font-medium stagger-text">
+                        <h2 className="text-2xl sm:text-3xl pt-2 text-[#555555] font-medium stagger-text">
                             And I am A{" "}<span className="text-black font-bold">Frontend Developer</span>
                         </h2>
                         <p className="text-xl sm:text-2xl pt-2 stagger-text relative">
