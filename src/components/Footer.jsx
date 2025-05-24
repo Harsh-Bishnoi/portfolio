@@ -41,8 +41,8 @@ const socialLinks = [
         )
     },
     {
-        href: "https://twitter.com/harshbishnoi",
-        label: "Twitter",
+        href: "https://instagram.com/harshbishnoi",
+        label: "Instagram",
         svg: (
             <svg
                 fill="currentColor"
@@ -55,7 +55,7 @@ const socialLinks = [
                 aria-hidden="true"
                 focusable="false"
             >
-                <path d="M23.954 4.569a10 10 0 01-2.825.775 4.932 4.932 0 002.163-2.724c-.949.58-2.005 1.005-3.127 1.236a4.916 4.916 0 00-8.361 4.482A13.951 13.951 0 011.671 3.149a4.822 4.822 0 001.523 6.574 4.922 4.922 0 01-2.229-.616c-.055 2.28 1.581 4.415 3.946 4.89a4.996 4.996 0 01-2.224.085c.623 1.941 2.444 3.355 4.604 3.395A9.867 9.867 0 010 19.54a13.94 13.94 0 007.548 2.212c9.056 0 14.01-7.496 14.01-13.985 0-.21 0-.423-.015-.633A9.936 9.936 0 0024 4.59z" />
+                <path d="M7.75 2h8.5A5.75 5.75 0 0122 7.75v8.5A5.75 5.75 0 0116.25 22h-8.5A5.75 5.75 0 012 16.25v-8.5A5.75 5.75 0 017.75 2zm0 1.5A4.25 4.25 0 003.5 7.75v8.5A4.25 4.25 0 007.75 20.5h8.5a4.25 4.25 0 004.25-4.25v-8.5a4.25 4.25 0 00-4.25-4.25h-8.5zM12 7a5 5 0 110 10 5 5 0 010-10zm0 1.5a3.5 3.5 0 100 7 3.5 3.5 0 000-7zm4.75-.88a1.12 1.12 0 11-2.24 0 1.12 1.12 0 012.24 0z" />
             </svg>
         )
     },
@@ -84,6 +84,14 @@ const Footer = () => {
     const footerRef = useRef(null);
     const animationRef = useRef(null);
 
+    const socialIconRefs = useRef([]);
+    socialIconRefs.current = [];
+    const addToSocialRefs = (el) => {
+        if (el && !socialIconRefs.current.includes(el)) {
+            socialIconRefs.current.push(el);
+        }
+    };
+
     const handleScroll = () => {
         if (!animationRef.current) return;
 
@@ -102,16 +110,26 @@ const Footer = () => {
         const footer = footerRef.current;
 
         gsap.set(footer, { y: 50, autoAlpha: 0 });
+        gsap.set(socialIconRefs.current, { y: 20, autoAlpha: 0 });
 
-        animationRef.current = gsap.to(footer, {
-            y: 0,
-            autoAlpha: 1,
-            duration: 0.5,
-            ease: 'power2.out',
-            paused: true,
-        });
+        animationRef.current = gsap.timeline({ paused: true })
+            .to(footer, {
+                y: 0,
+                autoAlpha: 1,
+                duration: 0.5,
+                ease: 'power2.out',
+            })
+            .to(socialIconRefs.current, {
+                y: 0,
+                autoAlpha: 1,
+                stagger: 0.1,
+                duration: 0.4,
+                ease: 'power2.out'
+            }, "-=0.3");
+
         window.addEventListener('scroll', handleScroll);
         handleScroll();
+
         return () => {
             window.removeEventListener('scroll', handleScroll);
             if (animationRef.current) {
@@ -156,15 +174,18 @@ const Footer = () => {
             <div className="flex justify-between mt-12">
                 <div className="w-[587px] h-[52px] bg-[#999999] rounded-tr-[100px]"></div>
 
-                <ul className="flex justify-center gap-6 text-black items-center mx-4 mt-2.5">
+                <ul className="flex justify-center gap-6 items-center mx-4 mt-2.5 text-[#333333]">
                     {socialLinks.map(({ href, label, svg }, i) => (
                         <li key={i}>
                             <a
+                                ref={addToSocialRefs}
                                 href={href}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 aria-label={label}
-                                className="text-black hover:text-[#333333] transition"
+                                className="hover:text-[#555555] transition"
+                                onMouseEnter={e => gsap.to(e.currentTarget, { scale: 1.2, duration: 0.2 })}
+                                onMouseLeave={e => gsap.to(e.currentTarget, { scale: 1, duration: 0.2 })}
                             >
                                 {svg}
                             </a>
